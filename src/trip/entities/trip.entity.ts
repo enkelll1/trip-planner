@@ -46,3 +46,7 @@ export class Trip {
 }
 
 export const TripSchema = SchemaFactory.createForClass(Trip);
+TripSchema.index({ user_id: 1 });
+TripSchema.index({ destination: 1 });
+TripSchema.index({ cost: 1 });
+TripSchema.index({ duration: 1 });
