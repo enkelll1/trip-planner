@@ -1,85 +1,82 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README</title>
+</head>
+<body>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1>NestJS-MongoDB-Redis Project</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<p>This project is a NestJS application that interacts with MongoDB and Redis, built to be flexible for deployment either with or without Docker.</p>
 
-## Description
+<h2>Getting Started</h2>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<h3>Building with Docker</h3>
+<ol>
+    <li>Clone the repository:
+        <pre><code>git clone https://github.com/enkelll1/manage-starred-repo.git</code></pre>
+    </li>
+    <li>Build the Docker containers:
+        <pre><code>docker-compose build</code></pre>
+    </li>
+    <li>Start the application:
+        <pre><code>docker-compose up</code></pre>
+    </li>
+</ol>
 
-## Project setup
+<h3>Building Without Docker</h3>
+<ol>
+    <li>Update your environment variables:
+        <ul>
+            <li>Rename <code>.env.example</code> to <code>.env</code>.</li>
+            <li>Modify the MongoDB and Redis credentials in your <code>.env</code> file according to your own setup.</li>
+        </ul>
+    </li>
+    <li>Install dependencies:
+        <pre><code>npm install</code></pre>
+    </li>
+    <li>Run tests (optional):
+        <pre><code>npm run test</code></pre>
+    </li>
+    <li>Start the application:
+        <pre><code>npm start</code></pre>
+    </li>
+</ol>
 
-```bash
-$ npm install
-```
+<h2>Application Access</h2>
+<ul>
+    <li><strong>App:</strong> <code>http://localhost:3000</code></li>
+    <li><strong>API Documentation (Swagger):</strong> <code>http://localhost:3000/api-docs</code></li>
+</ul>
 
-## Compile and run the project
+<h2>Notes</h2>
+<ol>
+    <li><strong>Modules:</strong>
+        <ul>
+            <li>I’ve used the <code>TravelModule</code> to handle data from the third-party API.</li>
+            <li>The <code>TripModule</code> is responsible for managing trips. This separation improves code readability and simplifies testing.</li>
+            <li>Some additional, optional fields are included in the <code>Trip</code> model for enhanced flexibility.</li>
+        </ul>
+    </li>
+    <li><strong>MongoDB Security:</strong>
+        <ul>
+            <li>The MongoDB instance in the Docker container lacks extensive security configurations to allow easy setup without requiring manual creation of root users, etc.</li>
+            <li>If you need a more secure MongoDB URL, I can provide one from a cloud-hosted database with all necessary security options.</li>
+        </ul>
+    </li>
+    <li><strong>JWT Authentication:</strong>
+        <ul>
+            <li>I have used JWT to protect endpoints. You just have to register a user based on a field described, log in, and use the JWT in the endpoints with the <code>Bearer</code> header.</li>
+        </ul>
+    </li>
+    <li><strong>Code Compromises:</strong>
+        <ul>
+            <li>Certain compromises were made in the code to align with the logic of the use cases. Please refer to the comments in the codebase for details.</li>
+        </ul>
+    </li>
+</ol>
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+</body>
+</html>
