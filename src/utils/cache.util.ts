@@ -7,7 +7,6 @@ export class CacheUtil {
   constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
 
   async getCache<T>(key: string): Promise<T | null> {
-    const AA = await this.cacheManager.get<T>(key);
     return await this.cacheManager.get<T>(key);
   }
 

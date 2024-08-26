@@ -7,6 +7,7 @@ import axios from 'axios';
 import { TravelsController } from './travels.controller';
 import { AuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CacheUtil } from '../utils/cache.util';
+import { ConfigModule } from '@nestjs/config';
 
 jest.mock('axios');
 
@@ -39,6 +40,7 @@ describe('TravelsService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [ConfigModule.forRoot()],
       controllers: [TravelsController],
       providers: [
         TravelsService,

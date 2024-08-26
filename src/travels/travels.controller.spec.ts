@@ -4,6 +4,7 @@ import { TravelResponseDto } from './dto/response/travel-response.dto';
 import { TravelsService } from './travels.service';
 import { TravelsRequestDto } from './dto/request/travels-request.dto';
 import { AuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ConfigModule } from '@nestjs/config';
 
 describe('TravelsController', () => {
   let controller: TravelsController;
@@ -27,6 +28,7 @@ describe('TravelsController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [ConfigModule.forRoot()],
       controllers: [TravelsController],
       providers: [
         {

@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "3000:3000"
+    networks:
+      - shared-network
     environment:
       - JWT_SECRET=fddasasfsdfgasasgsdagfdfasd
       - EXPIRES_IN=1
@@ -24,6 +26,8 @@ services:
     container_name: mongo
     ports:
       - "27017:27017"
+    networks:
+      - shared-network
     volumes:
       - mongo-data:/data/db
 
@@ -32,6 +36,11 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+    networks:
+      - shared-network
     command: redis-server --requirepass myRedisPassword
 volumes:
   mongo-data:
+
+networks:
+  shared-network:

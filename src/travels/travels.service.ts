@@ -1,9 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import axios from 'axios';
 import { TravelsRequestDto } from './dto/request/travels-request.dto';
-import * as process from 'node:process';
 import { TravelResponseDto } from './dto/response/travel-response.dto';
 import { CacheUtil } from '../utils/cache.util';
+import * as process from 'node:process';
 
 @Injectable()
 export class TravelsService {
