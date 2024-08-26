@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>NestJS-MongoDB-Redis Project</h1>
+<h1>Trip Planner</h1>
 
 <p>This project is a NestJS application that interacts with MongoDB and Redis, built to be flexible for deployment either with or without Docker.</p>
 
