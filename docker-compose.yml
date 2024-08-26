@@ -3,6 +3,7 @@ version: '3.8'
 services:
   app:
     build: .
+    restart: unless-stopped
     ports:
       - "3000:3000"
     networks:
@@ -10,8 +11,8 @@ services:
     environment:
       - JWT_SECRET=fddasasfsdfgasasgsdagfdfasd
       - EXPIRES_IN=1
-      - TRAVELS_API = https://z0qw1e7jpd.execute-api.eu-west-1.amazonaws.com/default/trips
-      - TRAVELS_API_KEY = fgy6fd9I316DSDD090Shj4eG1DUxuxpI8sZlAOg1
+      - TRAVELS_API=https://z0qw1e7jpd.execute-api.eu-west-1.amazonaws.com/default/trips
+      - TRAVELS_API_KEY=fgy6fd9I316DSDD090Shj4eG1DUxuxpI8sZlAOg1
       - MONGO_URL=mongodb://mongo:27017/trip-planner
       - REDIS_HOST=redis
       - REDIS_PORT=6379
