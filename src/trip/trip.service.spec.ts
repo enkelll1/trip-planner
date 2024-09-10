@@ -73,7 +73,18 @@ describe('TripService', () => {
     it('should return an array of trips', async () => {
       const userId = 'userId';
       const queryParams: GetTripDto = { sort_by: 'cheapest' };
-      const trips = [{ _id: 'someId', user_id: userId }];
+      const trips = [
+        {
+          _id: 'someId',
+          user_id: userId,
+          display_name: 'Test display name',
+          type: 'Test type',
+          origin: 'Test Origin',
+          destination: 'Test Destination',
+          cost: 100,
+          duration: 2,
+        },
+      ];
       mockTripModel.find.mockReturnValue({
         exec: jest.fn().mockResolvedValue(trips),
       });

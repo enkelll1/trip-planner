@@ -42,48 +42,65 @@ describe('TripController', () => {
   });
 
   describe('create', () => {
-    it('should call the tripService.create method with the correct parameters', async () => {
-      const req = { user: { id: 'userId' } };
-      const createTripDto: CreateTripDto = {
-        cost: 0,
-        destination: 'tripDestination',
-        display_name: 'tripDisplayName',
-        duration: 0,
-        origin: 'tripOrigin',
-        type: 'tripType',
-      };
+    const req = { user: { id: 'userId' } }; // Mocked request object with a user
+    const createTripDto: CreateTripDto = {
+      display_name: 'Test display name',
+      type: 'Test type',
+      origin: 'Test Origin',
+      destination: 'Test Destination',
+      cost: 100,
+      duration: 2,
+    };
+    const tripResponse: TripResponseDto = {
+      id: 'someId',
+      user_id: 'someUserId',
+      ...createTripDto,
+    };
 
-      mockTripService.create.mockResolvedValue(createTripDto);
+    it('should create a trip successfully and return TripResponseDto', async () => {
+      mockTripService.create.mockResolvedValue(tripResponse);
 
       const result = await controller.create(req, createTripDto);
 
-      expect(service.create).toHaveBeenCalledWith(createTripDto, 'userId');
-      expect(result).toEqual(createTripDto);
+      expect(result).toEqual(tripResponse);
+      expect(mockTripService.create).toHaveBeenCalledWith(
+        createTripDto,
+        req.user.id,
+      );
     });
   });
 
   describe('findAll', () => {
+    const req = { user: { id: 'userId' } };
+    const queryParams: GetTripDto = {
+      sort_by: 'cheapest',
+    };
     it('should return an array of TripResponseDto', async () => {
-      const req = { user: { id: 'userId' } };
-      const queryParams: GetTripDto = {
-        /* your GetTripDto fields */
-      };
       const tripResponseDto: TripResponseDto[] = [
-        /* your TripResponseDto fields */
+        {
+          id: 'someId',
+          user_id: 'someUserId',
+          display_name: 'Test display name',
+          type: 'Test type',
+          origin: 'Test Origin',
+          destination: 'Test Destination',
+          cost: 100,
+          duration: 2,
+        },
       ];
 
       mockTripService.findAll.mockResolvedValue(tripResponseDto);
 
       const result = await controller.findAll(req, queryParams);
 
-      expect(service.findAll).toHaveBeenCalledWith('userId', queryParams);
+      expect(service.findAll).toHaveBeenCalledWith(req.user.id, queryParams);
       expect(result).toEqual(tripResponseDto);
     });
   });
 
   describe('getMostPopularDestinations', () => {
+    const req = { user: { id: 'userId' } };
     it('should return an array of most saved destinations', async () => {
-      const req = { user: { id: 'userId' } };
       const mostSavedDestinations = [{ id: 'destinationId', count: 5 }];
 
       mockTripService.getMostSavedDestinations.mockResolvedValue(
@@ -92,38 +109,43 @@ describe('TripController', () => {
 
       const result = await controller.getMostPopularDestinations(req);
 
-      expect(service.getMostSavedDestinations).toHaveBeenCalledWith('userId');
+      expect(service.getMostSavedDestinations).toHaveBeenCalledWith(
+        req.user.id,
+      );
       expect(result).toEqual(mostSavedDestinations);
     });
   });
 
   describe('update', () => {
-    it('should return { ok: true } on successful update', async () => {
-      const req = { user: { id: 'userId' } };
-      const updateTripDto: UpdateTripDto = {
-        /* your UpdateTripDto fields */
-      };
-      const id = 'tripId';
+    const id = 'tripId';
+    const req = { user: { id: 'userId' } };
+    const updateTripDto: UpdateTripDto = {
+      origin: 'Updated Trip origin',
+    };
 
+    it('should return { ok: true } on successful update', async () => {
       mockTripService.update.mockResolvedValue({ ok: true });
 
       const result = await controller.update(req, id, updateTripDto);
 
-      expect(service.update).toHaveBeenCalledWith(id, updateTripDto, 'userId');
+      expect(service.update).toHaveBeenCalledWith(
+        id,
+        updateTripDto,
+        req.user.id,
+      );
       expect(result).toEqual({ ok: true });
     });
   });
 
   describe('remove', () => {
+    const req = { user: { id: 'userId' } };
+    const id = 'tripId';
     it('should return { ok: true } on successful remove', async () => {
-      const req = { user: { id: 'userId' } };
-      const id = 'tripId';
-
       mockTripService.remove.mockResolvedValue({ ok: true });
 
       const result = await controller.remove(req, id);
 
-      expect(service.remove).toHaveBeenCalledWith(id, 'userId');
+      expect(service.remove).toHaveBeenCalledWith(id, req.user.id);
       expect(result).toEqual({ ok: true });
     });
   });
